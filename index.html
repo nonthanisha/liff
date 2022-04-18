@@ -60,9 +60,19 @@
     }
 
     function openWindow() {
+      liff.openWindow({
+        url: "https://www.happyshopping2you.com",
+        external: true
+      })
     }
 
     async function getFriendship() {
+      const friend = await liff.getFriendship()
+      document.getElementById("friendship").append(friend.friendFlag)
+      if (!friend.friendFlag) {
+        if(confirm("คุณยังไม่ได้เป็นเพื่อนกับ bot จะเพิ่มเพื่อนเลยไหม ตอนนี้"))
+        window.location = "https://www.happyshopping2you.com"
+      }
     }
 
     async function sendMsg() {
@@ -75,6 +85,13 @@
           }
         ]);
         alert("Send Message success");
+      }else{
+        await liff.sendMessages([
+          {
+            type: 'sticker',
+            stickerId: 1,
+            packageId:1
+          }
       }
     }
 
@@ -116,7 +133,7 @@
       getEnvironment()
       getUserProfile()
       getContext()
-      // getFriendship()
+      getFriendship()
       // createUniversalLink()
     }
     main()
