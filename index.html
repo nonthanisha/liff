@@ -45,6 +45,13 @@
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <script>
     function createUniversalLink() {
+      const link1 = liff.permanentLink.createUrl();
+      document.getElementById("universalLink1").append(link1)
+
+      liff.permanentLink.setExtraQueryParam('param=9')
+      const link2 = liff.permanentLink.createUrl();
+      document.getElementById("universalLink2").append(link2)
+
     }
 
     async function shareMsg() {
@@ -65,14 +72,22 @@
       liff.closeWindow();
     }
 
+    // async function scanCode() {
+    //   const result = await liff.scancode()
+    //   document.getElementById("scanCode").append(result.value)
+    // }
     async function scanCode() {
-      const result = await liff.scanCode()
-      document.getElementById("scanCode").append(result.value)
+      try {
+        const result = await liff.scanCodeV2();
+        document.querySelector('#scanCode').innerHTML = result.value;
+      } catch(error) {
+        alert("scanCodeV2");
+      }
     }
 
     function openWindow() {
       liff.openWindow({
-        url: "https://line.me",
+        url: "https://www.happyshopping2you.com",
         external: true
       })
     }
