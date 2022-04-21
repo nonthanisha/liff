@@ -156,7 +156,7 @@
 
     async function main() {
       // alert("LINE Developers x Skooldio")
-      await liff.init({ liffId: "1657062878-jBLG2dby" })
+      await liff.init({ liffId: "1657062878-jBLG2dby", withLoginOnExternalBrowser: true })
       document.getElementById("isLoggedIn").append(liff.isLoggedIn())
       if(liff.isLoggedIn()){
         getEnvironment()
