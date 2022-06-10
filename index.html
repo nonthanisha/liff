@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover">
   <title>My LIFF app</title>
   <link rel="stylesheet" href="css/style.css" media="all">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-  integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
+
 <body>
   <div class="container-fluid">
     <div class="container shadow-lg">
@@ -67,9 +69,8 @@
         <p id="friendship"><b>isFriendship:</b> </p>
       </div>
       <div class="row m-1 shadow-sm">
-
+        <b>Customer Id:</b><p id="scanCode"> </p>
       </div>
-      <p id="scanCode"><b>Code:</b> </p>
       <div class="row m-1 shadow-sm">
         <p style="display: inline-block;" id="isLoggedIn"><b>isLoggedIn:</b> </p>
       </div>
@@ -124,12 +125,10 @@
     }
 
     async function shareMsg() {
-      await liff.shareTargetPicker([
-        {
-          type:"text",
-          text:"This message was sent by shareTargetPicker"
-        }
-      ])
+      await liff.shareTargetPicker([{
+        type: "text",
+        text: "This message was sent by shareTargetPicker"
+      }])
     }
 
     function logOut() {
@@ -146,6 +145,7 @@
     //   document.getElementById("scanCode").append(result.value)
     // }
     async function scanCode() {
+
         await liff.scanCodeV2()
         .then((result) => {
           document.querySelector('#scanCode').innerHTML = result.value;
@@ -168,29 +168,25 @@
       const friend = await liff.getFriendship()
       document.getElementById("friendship").append(friend.friendFlag)
       if (!friend.friendFlag) {
-        if(confirm("คุณยังไม่ได้เป็นเพื่อนกับ bot จะเพิ่มเพื่อนเลยไหม ตอนนี้"))
-        window.location = "https://www.happyshopping2you.com"
+        if (confirm("คุณยังไม่ได้เป็นเพื่อนกับ bot จะเพิ่มเพื่อนเลยไหม ตอนนี้"))
+          window.location = "https://www.happyshopping2you.com"
       }
     }
 
     async function sendMsg() {
       if (liff.getContext().type != "none") {
-        await liff.sendMessages([
-          {
-            type: 'sticker',
-            stickerId: 1,
-            packageId:1
-          }
-        ]);
+        await liff.sendMessages([{
+          type: 'sticker',
+          stickerId: 1,
+          packageId: 1
+        }]);
         alert("Send Message success");
-      }else{
-        await liff.sendMessages([
-          {
-            type: 'sticker',
-            stickerId: 1,
-            packageId:1
-          }
-        ]);
+      } else {
+        await liff.sendMessages([{
+          type: 'sticker',
+          stickerId: 1,
+          packageId: 1
+        }]);
       }
     }
 
@@ -219,7 +215,7 @@
       document.getElementById("isInClient").append(liff.isInClient())
       if (liff.isInClient()) {
         document.getElementById("btnLogOut").style.display = "none"
-      }else{
+      } else {
         document.getElementById("btnMsg").style.display = "none"
         document.getElementById("btnScanCode").style.display = "none"
         document.getElementById("btnClose").style.display = "none"
@@ -228,20 +224,24 @@
 
     async function main() {
       // alert("LINE Developers x Skooldio")
-      await liff.init({ liffId: "1657062878-jBLG2dby", withLoginOnExternalBrowser: true })
+      await liff.init({
+        liffId: "1657062878-jBLG2dby",
+        withLoginOnExternalBrowser: true
+      })
       document.getElementById("isLoggedIn").append(liff.isLoggedIn())
-      if(liff.isLoggedIn()){
+      if (liff.isLoggedIn()) {
         getEnvironment()
         getUserProfile()
         getContext()
         getFriendship()
         createUniversalLink()
         scanCode()
-      }else{
+      } else {
         liff.login();
       }
     }
     main()
   </script>
 </body>
+
 </html>
