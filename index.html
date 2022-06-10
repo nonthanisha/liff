@@ -146,12 +146,15 @@
     //   document.getElementById("scanCode").append(result.value)
     // }
     async function scanCode() {
-      try {
-        const result = await liff.scanCodeV2();
-        document.querySelector('#scanCode').innerHTML = result.value;
-      } catch(error) {
-        alert("Error scanCodeV2");
-      }
+        await liff.scanCodeV2()
+        .then((result) => {
+          document.querySelector('#scanCode').innerHTML = result.value;
+          result = { value: "" }
+        })
+        .catch((error) => {
+          alert("Error scanCodeV2", error);
+        });
+        // document.querySelector('#scanCode').innerHTML = result.value;
     }
 
     function openWindow() {
