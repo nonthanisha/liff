@@ -147,18 +147,18 @@
     // }
     async function scanCode() {
       try {
-        const result = await liff.scanCodeV2();
-        document.querySelector('#result').innerHTML = result.value;
+        liff.init({
+          liffId: '1657062878-jBLG2dby'
+        }).then(()=>{
+          if (!liff.isLoggedIn()) {
+            liff.login();
+          }
+        }).then(()=>{
+          const result = await liff.scanCodeV2();
+          document.querySelector('#result').innerHTML = result.value;
+        })
       } catch (error) {
-        console.log('scanCodeV2', error);
-      }
-    }
-    async function main() {
-      await liff.init({
-        liffId: '1653575653-1ygAp27X'
-      });
-      if (!liff.isLoggedIn()) {
-        liff.login();
+        alert('scanCodeV2', error);
       }
     }
 
