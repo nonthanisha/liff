@@ -155,7 +155,7 @@
           }
         }).then(()=>{
           const result = await liff.scanCodeV2();
-          document.querySelector('#result').innerHTML = result.value;
+          document.querySelector('#btnScanCode').innerHTML = result.value;
         })
       } catch (error) {
         alert('scanCodeV2', error);
