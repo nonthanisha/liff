@@ -9,6 +9,9 @@
 </head>
 <body>
   <div class="container">
+    <div class="bg-primary text-center text-light">
+      <h1>Workshop Liff</h1>
+    </div>
     <div class="row">
       <p id="os"><b>OS:</b> </p>
     </div>
@@ -138,7 +141,7 @@
         const result = await liff.scanCodeV2();
         document.querySelector('#scanCode').innerHTML = result.value;
       } catch(error) {
-        alert("scanCodeV2");
+        alert("error scanCodeV2");
       }
     }
 
